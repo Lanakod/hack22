@@ -9,10 +9,9 @@ const scene = new Scenes.WizardScene(
     return ctx.wizard.next();
   },
   async (ctx) => {
-    //@ts-ignore
-    Workers.delete(String(ctx.message.from.id));
-    //@ts-ignore
-    Heads.delete(String(ctx.message.from.id));
+
+    Workers.delete(String(ctx.message!.from.id));
+    Heads.delete(String(ctx.message!.from.id));
     // @ts-ignore
     switch (ctx.message.text) {
       case "Работодатель":

@@ -6,8 +6,7 @@ export default async (bot: Telegraf<Scenes.WizardContext>, PG: any) => {
 
   console.log("\nLoading scenes...");
   const scenes: Scenes.WizardScene<any>[] = [];
-  //@ts-ignore
-  await files.map(async (file) => {
+  await files.map(async (file: any) => {
     const scene = (await require(file)).default;
     console.log(file.split("/").pop(), "- Successful");
     scenes.push(scene);
