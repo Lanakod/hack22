@@ -6,8 +6,7 @@ const kb: IKeyboard = {
   name: "📑 Ваши вакансии",
   callback: async (ctx) => {
     const markup = Markup.keyboard([["➕ Создать", "🏠 На главную"]]).resize();
-    //@ts-ignore
-    const vacancies = (await Vacancies.get(`${ctx.message.from.id}`)) || [];
+    const vacancies = (await Vacancies.get(`${ctx.message!.from.id}`)) || [];
     await ctx.reply(
       vacancies.length ? "Ваши вакансии:" : "У вас ещё нет вакансий",
       markup

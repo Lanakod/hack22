@@ -23,8 +23,8 @@ const scene = new Scenes.WizardScene(
   async (ctx) => {
     //@ts-ignore
     await Heads.set(`${ctx.message.from.id}.description`, ctx.message.text);
-    //@ts-ignore
-    const user = await Heads.get(String(ctx.message.from.id));
+
+    const user = await Heads.get(String(ctx.message!.from.id));
     const markup = Markup.keyboard(["Да", "Нет"]).oneTime().resize();
     await ctx.reply(
       `Проверьте, правильная ли информация?\nИмя: ${user.firstname}\nФамилия: ${user.lastname}\nОписание: ${user.description}`,
