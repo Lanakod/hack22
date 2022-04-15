@@ -19,22 +19,14 @@ abstract class ApiRequest extends Api {
    * Request to API endpoint
    *
    */
-  public async call<R extends BaseResponse>(
-    uri: string,
-    method: RequestMethod,
-    params?: object,
-    data?: object
-  ): Promise<R> {
+  public async call<R extends BaseResponse>(uri: string, method: RequestMethod, params?: object, data?: object): Promise<R> {
     const headers: Headers = {
       'Content-Type': 'application/json',
     };
 
     let fetchUrl = this.getEndpoint().concat(uri);
     if (params) {
-      fetchUrl =
-        fetchUrl +
-        '?' +
-        new URLSearchParams({ ...params }).toString();
+      fetchUrl = fetchUrl + '?' + new URLSearchParams({ ...params }).toString();
     }
 
     const response = await this.client(fetchUrl, {
@@ -43,7 +35,11 @@ abstract class ApiRequest extends Api {
       body: data ? JSON.stringify(data) : undefined,
     });
 
-    return (await response.json()) as R;
+    return {
+      status: response.status,
+      data: await response.json(),
+      statusText: response.statusText,
+    } as R;
   }
 }
 
