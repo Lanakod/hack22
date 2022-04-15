@@ -6,8 +6,7 @@ export default async (bot: Telegraf<Scenes.WizardContext>, PG: any) => {
   const files = await PG(path.resolve("src", "keyboards", "*.ts"));
 
   console.log("\nLoading keyboards...");
-  //@ts-ignore
-  files.map(async (file) => {
+  files.map(async (file: any) => {
     const kb = (await import(file)).default as IKeyboard;
     if (!kb.name)
       return console.log(file.split("/").pop(), "- Missing name ⚠️");

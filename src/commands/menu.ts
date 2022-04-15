@@ -6,10 +6,8 @@ const cmd: ICommand = {
   name: 'menu',
   description: 'Главное меню',
   callback: async (ctx) => {
-    //@ts-ignore
-    const worker = await Workers.get(`${ctx.message.from.id}`);
-    //@ts-ignore
-    const head = await Heads.get(`${ctx.message.from.id}`);
+    const worker = await Workers.get(`${ctx.message!.from.id}`);
+    const head = await Heads.get(`${ctx.message!.from.id}`);
     if (worker) {
       const markup = Markup.keyboard([
         ['🔎 Вакансии', '🔭 Ваша анкета'],

@@ -10,10 +10,8 @@ const scene = new Scenes.WizardScene(
     return ctx.wizard.next();
   },
   async (ctx) => {
-    //@ts-ignore
     await VacanciesCollector.set(
-      //@ts-ignore
-      `${ctx.message.from.id}.name`,
+      `${ctx.message!.from.id}.name`,
       //@ts-ignore
       ctx.message.text
     );
@@ -22,8 +20,7 @@ const scene = new Scenes.WizardScene(
   },
   async (ctx) => {
     await VacanciesCollector.set(
-      //@ts-ignore
-      `${ctx.message.from.id}.salary`,
+      `${ctx.message!.from.id}.salary`,
       //@ts-ignore
       ctx.message.text
     );
@@ -32,8 +29,7 @@ const scene = new Scenes.WizardScene(
   },
   async (ctx) => {
     await VacanciesCollector.set(
-      //@ts-ignore
-      `${ctx.message.from.id}.description`,
+      `${ctx.message!.from.id}.description`,
       //@ts-ignore
       ctx.message.text
     );
@@ -50,8 +46,7 @@ const scene = new Scenes.WizardScene(
       message: { document },
       message,
     } = ctx;
-    //@ts-ignore
-    const vacancy = await VacanciesCollector.get(String(message.from.id));
+    const vacancy = await VacanciesCollector.get(String(message!.from.id));
     //@ts-ignore
     if (message.text == "Пропустить") {
       const markup = Markup.keyboard(["Да", "Нет"]).oneTime().resize();
@@ -63,8 +58,7 @@ const scene = new Scenes.WizardScene(
     }
     if (document && /\.(docx|pdf)$/i.test(document.file_name)) {
       await VacanciesCollector.set(
-        //@ts-ignore
-        `${message.from.id}.document`,
+        `${message!.from.id}.document`,
         document.file_id
       );
       const markup = Markup.keyboard(["Да", "Нет"]).oneTime().resize();

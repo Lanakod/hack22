@@ -8,8 +8,7 @@ export default async (bot: Telegraf<Scenes.WizardContext>, PG: any) => {
   const files = await PG(path.resolve("src", "commands", "*.ts"));
 
   console.log("\nLoading commands...");
-  // @ts-ignore
-  files.map(async (file) => {
+  files.map(async (file: any) => {
     const command = (await require(file)).default as ICommand;
     if (!command.name)
       return console.log(file.split("/").pop(), "- Missing name ⚠️");

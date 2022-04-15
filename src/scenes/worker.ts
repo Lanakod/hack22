@@ -42,10 +42,8 @@ const scene = new Scenes.WizardScene(
     const markup = Markup.keyboard(['Да', 'Нет']).oneTime().resize();
     //@ts-ignore
     if (ctx.message.text == 'Пропустить') {
-      //@ts-ignore
-      const user = await Workers.get(String(ctx.message.from.id));
+      const user = await Workers.get(String(ctx.message!.from.id));
       await ctx.reply(
-        //@ts-ignore
         `Проверьте, правильная ли информация?\nИмя: ${user.firstname}\nФамилия: ${user.lastname}\nОписание: ${user.description}`,
         markup
       );
@@ -53,13 +51,11 @@ const scene = new Scenes.WizardScene(
     }
     if (document && /\.(docx|pdf)$/i.test(document.file_name)) {
       await Workers.set(
-        //@ts-ignore
-        `${ctx.message.from.id}.document`,
+        `${ctx.message!.from.id}.document`,
         //@ts-ignore
         ctx.message.document.file_id
       );
-      //@ts-ignore
-      const user = await Workers.get(String(ctx.message.from.id));
+      const user = await Workers.get(String(ctx.message!.from.id));
 
       await ctx.reply(
         `Проверьте, правильная ли информация?\nИмя: ${user.firstname}\nФамилия: ${user.lastname}\nОписание: ${user.description}`,
