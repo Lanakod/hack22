@@ -27,7 +27,7 @@ export interface Area {
 export interface Address {
   city?: string;
   street?: string;
-  buidling?: string;
+  building?: string;
   description?: string;
   lat?: number;
   lng?: number;
@@ -84,7 +84,7 @@ export interface BaseResponse {
   data: ResponseVacancyData | ExtendedVacancyData;
 }
 
-export interface Vacancy {
+export interface Vacancy extends defaultObj {
   id: string;
   premium: boolean;
   name: string;
@@ -94,7 +94,7 @@ export interface Vacancy {
   area: Area;
   salary: Salary;
   type: VacancyType;
-  address: string | null;
+  address: Address | null;
   response_url: string | null;
   sort_point_distance: string | null;
   archived: boolean;
@@ -113,4 +113,8 @@ export interface Vacancy {
   working_time_intervals: any;
   working_time_modes: any;
   accept_temporary: boolean;
+}
+
+interface defaultObj {
+  [key: string]: any;
 }
