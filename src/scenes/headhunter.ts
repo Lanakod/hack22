@@ -4,7 +4,7 @@ import { Scenes } from 'telegraf';
 const scene = new Scenes.WizardScene(
   'hh-scene',
   async (ctx) => {
-    await ctx.reply('Введите название вакансии:', {
+    await ctx.reply('Введите вашу специальность:', {
       reply_markup: { remove_keyboard: true },
     });
     return ctx.wizard.next();
